@@ -1,0 +1,272 @@
+@import "scss/vars";
+@import "scss/calendar";
+
+
+body {
+  margin: 0;
+  font-family: 'Sora', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $grn_drk;
+  min-width: 1220px;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: 60px 10fr;
+  grid-template-columns: 230px 10fr;
+  grid-template-areas: "header header" "sidebar content";
+  grid-gap: 4px;
+  box-sizing: border-box;
+  padding: 4px;
+  min-height: 100vh;
+  width: 1200px;
+  margin: 0 auto;
+
+  .header {
+    grid-area: header;
+    background-color: $grn_lht;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+
+    &_logo {
+      display: block;
+      width: 50px;
+      height: 50px;
+      animation: logospin infinite 10s linear;
+    }
+
+    &_text {
+      display: block;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(white, 0.5);
+    }
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    background-color: #61a60e;
+    padding: 10px;
+  }
+
+  .content {
+    grid-area: content;
+    background-color: white;
+    color: $drk;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+}
+
+.pages {
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-size: 14px;
+    line-height: 20px;
+    text-transform: uppercase;
+
+    li {
+      padding: 2px 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+      a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        transition: 0.15s linear;
+        color: #ffffff;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        &.current {
+          color: #ffffff;
+          background-color: #036646;
+        }
+      }
+    }
+  }
+}
+
+.dashboard {
+
+  &__header {
+    border-bottom: 1px solid rgba(black, .15);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 32px;
+      line-height: 1.1;
+      color: $drk;
+      font-weight: 300;
+
+      small {
+        font-size: 14px;
+        font-weight: 400;
+        color: $grn_lht;
+        margin-left: 20px;
+      }
+    }
+  }
+
+  &__row {
+    margin: 20px -20px;
+    display: flex;
+    align-items: center;
+
+    .col {
+      padding: 0 20px;
+      flex: none;
+
+      &.flex {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+  }
+}
+
+.catalog {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+
+    thead {
+      background-color: #eeeeee;
+      font-size: 14px;
+      line-height: 15px;
+      text-transform: uppercase;
+    }
+
+    th, td {
+      padding: 10px;
+      font-weight: 400;
+      text-align: left;
+
+      &:first-child {
+        text-align: center;
+        width: 50px;
+      }
+
+      &:nth-child(3) {
+        width: 160px;
+      }
+
+      &:nth-child(4), &:nth-child(5) {
+        text-align: center;
+        width: 100px;
+      }
+    }
+
+    th {
+      transition: .15s line-height;
+      cursor: pointer;
+
+      span {
+        display: inline-block;
+        line-height: 1;
+        vertical-align: middle;
+      }
+
+      .icon {
+        width: 1em;
+        height: 1em;
+        margin: .25em;
+        opacity: .25;
+        transition: .15s line-height;
+        fill: $drk;
+
+        &.active {
+          opacity: 1;
+          color: $grn_drk;
+        }
+      }
+
+      &:hover {
+        background-color: rgba($drk, .15);
+        .icon {
+          color: $grn_lht;
+          opacity: 1;
+
+          &.active {
+              color: $grn_lht;
+          }
+        }
+      }
+
+    }
+
+    tr {
+      border-bottom: 1px solid rgba($drk, .15);
+    }
+
+    tbody {
+      tr {
+        transition: .15s ease-in-out;
+        cursor: pointer;
+        user-select: none;
+
+        &:hover {
+          background-color: $grn_lht;
+          color: white;
+        }
+
+        td {
+          font-size: 14px;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    text-align: center;
+    user-select: none;
+
+    .counter {
+      display: inline-block;
+      line-height: 1;
+      vertical-align: middle;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 0 10px;
+      color: rgba($drk, .5);
+    }
+
+    button {
+      background-color: $grn_lht;
+      border: 0;
+      color: white;
+      margin: 0 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      outline: 0;
+
+      &:hover {
+        background-color: $grn_drk;
+      }
+    }
+  }
+}
+
+
+
+@keyframes logospin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
