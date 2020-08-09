@@ -16,9 +16,9 @@ function App(props) {
         <Sidebar />
         <main className="content">
           <Switch>
-            <Route component={Dashboard} path="/" exact />
-            <Route component={Catalog} path="/catalog" exact />
-            <Route component={Details} path="/catalog/item-:slug" />
+            <Route component={Dashboard} path="/test_app/" exact />
+            <Route component={Catalog} path="/test_app/catalog" exact />
+            <Route component={Details} path="/test_app/catalog/item-:slug" />
           </Switch>
         </main>
       </div>

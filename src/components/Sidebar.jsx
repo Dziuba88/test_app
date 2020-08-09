@@ -7,20 +7,15 @@ const Sidebar = () => {
       <nav className="pages">
         <ul>
           <li>
-            <NavLink to="/" activeClassName="current" exact>
+            <NavLink to="/test_app/" activeClassName="current" exact>
               Dashboard
             </NavLink>
           </li>
           <li>
-            <NavLink to="/catalog" activeClassName="current" exact>
+            <NavLink to="/test_app/catalog" activeClassName="current" exact>
               Catalog
             </NavLink>
           </li>
-          {/* <li>
-            <NavLink to="/catalog/detail" activeClassName="current">
-              Details
-            </NavLink>
-          </li> */}
         </ul>
       </nav>
     </aside>
