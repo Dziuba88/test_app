@@ -56,24 +56,16 @@ export default class Dashboard extends Component {
       i++;
     }
 
-    let minDate = chartsData[0].date;
-    let maxDate = minDate;
-
-    chartsData.forEach((el) => {
-      if (el.date > maxDate) maxDate = el.date;
-      if (el.date < minDate) minDate = el.date;
-    });
-
-    const startDate = minDate;
-    const endDate = maxDate;
-
     chartsData.sort((a, b) => a.date - b.date);
+
+    const minDate = chartsData[0].date;
+    const maxDate = chartsData[chartsData.length - 1].date;
 
     this.setState({
       minDate,
       maxDate,
-      endDate,
-      startDate,
+      startDate: minDate,
+      endDate: maxDate,
       chartsData,
     });
   };
@@ -81,18 +73,9 @@ export default class Dashboard extends Component {
   filterData = () => {
     const { chartsData, startDate, endDate } = this.state;
 
-    if (startDate > 0 && endDate) {
-      const filteredData = [];
-
-      chartsData.forEach((el) => {
-        if (el.date !== undefined && el.date >= startDate && el.date <= endDate)
-          filteredData.push(el);
-      });
-
-      return filteredData;
-    } else {
-      return chartsData;
-    }
+    return chartsData.filter(
+      (el) => el.date && el.date >= startDate && el.date <= endDate
+    );
   };
 
   barChartOptions = () => {

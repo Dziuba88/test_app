@@ -1,8 +1,7 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import DataTable from "./DataTable";
 import firebase from "../firebase";
-
-
+import preloader from "../loader.svg";
 
 export default class Catalog extends Component {
   constructor(props) {
@@ -10,54 +9,54 @@ export default class Catalog extends Component {
     this.columns = [
       {
         Header: "#",
-        accessor: d => d.id
+        accessor: (d) => d.id,
       },
       {
         Header: "Movie title",
         id: "title",
-        accessor: d => d.title
+        accessor: (d) => d.title,
       },
       {
         Header: "Director",
-        accessor: d => d.director
+        accessor: (d) => d.director,
       },
       {
         Header: "Year",
-        accessor: d => d.year
+        accessor: (d) => d.year,
       },
       {
         Header: "Runtime",
-        accessor: d => d.runtime
-      }
+        accessor: (d) => d.runtime,
+      },
     ];
-    this.state = {movies: []};
+    this.state = { movies: [], loading: true };
   }
 
-  createData = snap => {
-    const movies = snap.val().map(movie => ({
+  createData = (snap) => {
+    const movies = snap.val().map((movie) => ({
       id: movie.id,
       title: movie.title,
       director: movie.director,
       year: movie.year,
       runtime: movie.runtime,
-    }))
-    this.setState({movies})
-  }
-
+    }));
+    setTimeout(() => {
+      this.setState({ movies, loading: false });
+    }, 1000);
+  };
 
   componentDidMount = () => {
-    firebase.database()
-      .ref('/')
-      .once('value', this.createData)
-  }
+    firebase.database().ref("/").once("value", this.createData);
+  };
   render = () => {
     return (
       <div className="catalog">
-        <DataTable
-          columns={this.columns}
-          data={this.state.movies} />
+        {this.state.loading ? (
+          <img className="preloader" src={preloader} alt="" />
+        ) : (
+          <DataTable columns={this.columns} data={this.state.movies} />
+        )}
       </div>
-    )
-  }
+    );
+  };
 }
-

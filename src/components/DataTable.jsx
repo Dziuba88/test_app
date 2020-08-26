@@ -1,6 +1,5 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
-
 import { useTable, useSortBy, usePagination } from "react-table";
 
 function DataTable({ columns, data }) {
@@ -17,7 +16,8 @@ function DataTable({ columns, data }) {
     gotoPage,
     nextPage,
     previousPage,
-    state: { pageIndex },
+    setPageSize,
+    state: { pageIndex, pageSize },
   } = useTable(
     {
       columns,
@@ -32,6 +32,20 @@ function DataTable({ columns, data }) {
 
   return (
     <>
+      <div className="pagesize">
+        <select
+          value={pageSize}
+          onChange={(e) => {
+            setPageSize(Number(e.target.value));
+          }}
+        >
+          {[5, 10, 15, 20].map((pageSize) => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -94,7 +108,6 @@ function DataTable({ columns, data }) {
           })}
         </tbody>
       </table>
-
       <div className="pagination">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
           {"<<"}
